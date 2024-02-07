@@ -1,0 +1,53 @@
+{
+  "name": "smart_team_back",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "projects/shay-arbes/smart_team_back/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/projects/shay-arbes/smart_team_back",
+        "main": "projects/shay-arbes/smart_team_back/src/main.ts",
+        "tsConfig": "projects/shay-arbes/smart_team_back/tsconfig.app.json",
+        "assets": ["projects/shay-arbes/smart_team_back/src/assets"],
+        "webpackConfig": "projects/shay-arbes/smart_team_back/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "smart_team_back:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "smart_team_back:build:development"
+        },
+        "production": {
+          "buildTarget": "smart_team_back:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "projects/shay-arbes/smart_team_back/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

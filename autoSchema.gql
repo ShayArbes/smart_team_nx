@@ -1,0 +1,107 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UnitType {
+  intValue: Int!
+  unit: String!
+}
+
+type Deal {
+  productName: String!
+  description: String!
+  dealManagerId: String!
+  status: String!
+  width: UnitType!
+  length: UnitType!
+  height: UnitType!
+  depth: UnitType!
+  categories: String!
+  interiorMaterial: String!
+  exteriorMaterial: String!
+  img_url: String!
+  location: String!
+  targetAmount: Float!
+  daysValid: Float!
+}
+
+type User {
+  id: String!
+  username: String!
+  email: String!
+  password: String!
+  phone: String
+  roles: String!
+  messages: [UserMessage!]!
+  likedDeals: [UserLikedDeal!]!
+}
+
+type UserMessage {
+  id: String!
+  text: String!
+  user: User!
+}
+
+type UserLikedDeal {
+  id: String!
+  userId: String!
+  dealId: String!
+}
+
+type Query {
+  getProfile: User!
+  users: [User!]!
+  user(id: String!): User!
+  userByEmail(email: String!): User!
+  getAllDeals: [Deal!]!
+  getDealById(id: String!): Deal!
+}
+
+type Mutation {
+  signIn(email: String!, password: String!): String!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): User!
+  createDeal(input: CreateDealInput!): Deal!
+  updateDeal(id: String!, input: CreateDealInput!): Deal!
+  deleteDeal(id: String!): Deal!
+}
+
+input CreateUserInput {
+  username: String!
+  email: String!
+  password: String!
+  phone: String!
+  roles: String!
+}
+
+input UpdateUserInput {
+  username: String
+  email: String
+  password: String
+  phone: String
+  roles: String
+  id: String!
+}
+
+input CreateDealInput {
+  productName: String!
+  description: String!
+  width: Float!
+  length: Float!
+  dealManagerId: String!
+  status: String!
+  height: Float!
+  depth: Float!
+  categories: String!
+  interiorMaterial: String!
+  exteriorMaterial: String!
+  img_url: String!
+  location: String!
+  targetAmount: Float!
+  daysValid: Float
+}
+
+type Subscription {
+  userCreated: String!
+}

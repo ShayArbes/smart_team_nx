@@ -1,0 +1,74 @@
+{
+  "name": "smart_team_front",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "projects/shay-arbes/smart_team_front/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/projects/shay-arbes/smart_team_front"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "smart_team_front:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "smart_team_front:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "smart_team_front:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "smart_team_front:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "smart_team_front:build:development"
+        },
+        "production": {
+          "buildTarget": "smart_team_front:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../../coverage/projects/shay-arbes/smart_team_front"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "smart_team_front:build"
+      }
+    }
+  },
+  "tags": []
+}
